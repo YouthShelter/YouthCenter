@@ -35,6 +35,16 @@ public class CustomViewPager extends ViewPager {
         return false;
     }
 
+    @Override
+    public void setCurrentItem(int item) {
+        super.setCurrentItem(item,false);
+    }
+
+    @Override
+    public void setCurrentItem(int item, boolean smoothScroll) {
+        super.setCurrentItem(item, false);
+    }
+
     public void setSwipeEnabled(boolean enabled) {
         this.swipeEnabled = enabled;
     }

@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),this, messageHandler);
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setSwipeEnabled(false);
-        viewPager.set
+
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.main_tabLayout);
         tabLayout.setupWithViewPager(viewPager);

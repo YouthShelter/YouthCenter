@@ -1,3 +1,4 @@
+/*
 package youthshelter.youth.co.kr.data;
 
 import java.io.Serializable;
@@ -28,3 +29,36 @@ public class YouthCenter implements Serializable {
         this.like = like;
     }
 }
+*/
+
+package youthshelter.youth.co.kr.data;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class YouthCenter implements Serializable {
+    private String address;
+    private String bonus;
+    private int count;
+    private String format;
+    private String homepage;
+    private String image;
+    private String introduction;
+    private int like;
+    private String name;
+    private String phone;
+    private String saturday;
+    private String sunday;
+    private String weekday;
+}
+
+

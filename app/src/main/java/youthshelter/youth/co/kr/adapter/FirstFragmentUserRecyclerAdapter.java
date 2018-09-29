@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Handler;
 
 
@@ -35,7 +36,10 @@ public class FirstFragmentUserRecyclerAdapter extends RecyclerView.Adapter<First
         this.handler = handler;
         arrayList = new ArrayList();
     }
-
+    public void setItem(ArrayList<YouthCenter> centers){
+        this.arrayList = centers;
+        notifyDataSetChanged();
+    }
     class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView shelter_image_ImageView;
         TextView shelter_location_TextView;
@@ -80,16 +84,6 @@ public class FirstFragmentUserRecyclerAdapter extends RecyclerView.Adapter<First
             Intent intent = new Intent(context,DetailActivity.class);
             intent.putExtra("center",arrayList.get(getLayoutPosition()));
             context.startActivity(intent);
-//            Toast.makeText(context, "블루투스를 검색합니다.",Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent(context,BluetoothConnect.class);
-//            context.startActivity(intent);
-           /* Bundle bundle = new Bundle();
-            bundle.putInt("message",1);
-            String data = textView.getText().toString();
-            bundle.putString("data",data);
-            Message message = new Message();
-            message.setData(bundle);
-            handler.sendMessage(message);*/
         }
     }
 
@@ -102,14 +96,46 @@ public class FirstFragmentUserRecyclerAdapter extends RecyclerView.Adapter<First
     public int getItemCount() {
         return arrayList.size();
     }
+    private String doDayOfWeek() {
+        Calendar cal = Calendar.getInstance();
+        String strWeek = null;
+
+        int nWeek = cal.get(Calendar.DAY_OF_WEEK);
+        if (nWeek == 1) {
+            strWeek = "일요일";
+        } else if (nWeek == 2) {
+            strWeek = "월요";
+        } else if (nWeek == 3) {
+            strWeek = "화요일";
+        } else if (nWeek == 4) {
+            strWeek = "수요일";
+        } else if (nWeek == 5) {
+            strWeek = "목요일";
+        } else if (nWeek == 6) {
+            strWeek = "금요일";
+        } else if (nWeek == 7) {
+            strWeek = "토요일";
+        }
+
+        return strWeek;
+    }
 
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
         YouthCenter center = arrayList.get(position);
 
-        holder.shelter_location_TextView.setText(center.getCenterLocation());
-        holder.shelter_name_TextView.setText(center.getCenterName());
-        holder.shelter_playTime_TextView.setText(center.getCenterPlayTime());
+        holder.shelter_location_TextView.setText(center.getAddress());
+        holder.shelter_name_TextView.setText(center.getName());
+        if(doDayOfWeek().equals("일요일")){
+            holder.shelter_playTime_TextView.setText(center.getSunday());
+        }
+        else if(doDayOfWeek().equals("토요일")){
+            holder.shelter_playTime_TextView.setText(center.getSaturday());
+        }
+        else{
+            holder.shelter_playTime_TextView.setText(center.getWeekday());
+        }
+
         holder.shelter_like_TextView.setText(center.getLike()+"");
 
 

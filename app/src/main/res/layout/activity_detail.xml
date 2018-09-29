@@ -64,7 +64,7 @@
                     android:src="@drawable/heart" />
 
                 <TextView
-                    android:id="@+id/shelter_like_TextView"
+                    android:id="@+id/shelter_like_detail_TextView"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.13"

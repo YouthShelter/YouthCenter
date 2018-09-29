@@ -13,8 +13,12 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -36,17 +40,18 @@ public class DetailActivity extends AppCompatActivity {
     private TextView shelter_name_detail_TextView;
     private TextView shelter_tel_detail_TextView;
     private TextView shelter_website_detail_TextView;
+    private TextView shelter_like_detail_TextView;
+
 
     private LinearLayout shelter_tel_detail_LinearLayout;
     private LinearLayout shelter_website_detail_LinearLayout;
 
-    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference conditionRef = mRootRef.child("text");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
         center = (YouthCenter) getIntent().getSerializableExtra("center");
 
         shelter_info_detail_TextView = (TextView) findViewById(R.id.shelter_info_detail_TextView);
@@ -54,11 +59,16 @@ public class DetailActivity extends AppCompatActivity {
         shelter_name_detail_TextView = (TextView) findViewById(R.id.shelter_name_detail_TextView);
         shelter_tel_detail_TextView = (TextView) findViewById(R.id.shelter_tel_detail_TextView);
         shelter_website_detail_TextView = (TextView) findViewById(R.id.shelter_website_detail_TextView);
+        shelter_like_detail_TextView = (TextView) findViewById(R.id.shelter_like_detail_TextView);
 
         shelter_tel_detail_LinearLayout = (LinearLayout) findViewById(R.id.shelter_tel_detail_LinearLayout);
         shelter_website_detail_LinearLayout = (LinearLayout) findViewById(R.id.shelter_website_detail_LinearLayout);
 
-
+        shelter_name_detail_TextView.setText(center.getName());
+        shelter_location_detail_TextView.setText(center.getAddress());
+        shelter_tel_detail_TextView.setText(center.getPhone());
+        shelter_like_detail_TextView.setText(center.getLike());
+        String info = "소개\n" + center.getIntroduction() + "\n\n정보\n" + center.getBonus() + "\n평일\n" + center.getWeekday() + "\n\n토요일\n" + center.getSaturday() + "\n\n일요일\n" + center.getSunday();
         shelter_tel_detail_LinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,16 +81,16 @@ public class DetailActivity extends AppCompatActivity {
         shelter_website_detail_LinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(center == null || center.getCenterWebSite() == null){
+                if(center == null || center.getHomepage() == null){
                     Toast.makeText(getApplicationContext(),"웹사이트를 지원하지 않는 장소 입니다.",Toast.LENGTH_SHORT).show();
                 }
                 else
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(center.getCenterWebSite())));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(center.getHomepage())));
             }
         });
 
 
-        Log.i("ttttt", center.getCenterLocation());
+        Log.i("ttttt", center.getAddress());
         ArrayList<Integer> imageURL = new ArrayList<>();
 
         imageURL.add(R.drawable.heart);

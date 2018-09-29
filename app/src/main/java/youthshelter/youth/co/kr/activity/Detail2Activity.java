@@ -11,10 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
+import youthshelter.youth.co.kr.GlideApp;
 import youthshelter.youth.co.kr.R;
 import youthshelter.youth.co.kr.components.CircleAnimIndicator;
 import youthshelter.youth.co.kr.data.CultureData;
@@ -60,7 +61,7 @@ public class Detail2Activity extends AppCompatActivity {
         culture_info_detail_TextView.setText("※소개\n"+ cultureData.getCultureName() + "\n\n※정보\n"+ cultureData.getCultureprogram() + "\n\n※시간\n" + cultureData.getStart_date() + " - " + cultureData.getEnd_date() + "\n" + cultureData.getCulturePlayTime());
         culture_location_detail_TextView.setText(cultureData.getCultureLocation());
         culture_tel_detail_TextView.setText(cultureData.getCultureTel());
-        culture_website_detail_TextView.setText(cultureData.getCultureWebSite());
+//      culture_website_detail_TextView.setText(cultureData.getCultureWebSite());
         culture_name_detail_TextView.setText(cultureData.getCultureName());
 
         culture_tel_detail_LinearLayout.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +85,9 @@ public class Detail2Activity extends AppCompatActivity {
             }
         });
 
-        Glide.with(this).load(cultureData.getImageName().toLowerCase()).thumbnail(0.1f).into(culture_detail_imageview);
+        //Glide.with(this).load(cultureData.getImageName().toLowerCase()).thumbnail(0.1f).into(culture_detail_imageview);
+        GlideApp.with(this).load(cultureData.getImageName().toLowerCase()).placeholder(R.drawable.no_image).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.2f).into(culture_detail_imageview);
+
 
     }
 

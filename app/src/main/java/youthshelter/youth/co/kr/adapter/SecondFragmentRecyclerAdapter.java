@@ -11,10 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
+import youthshelter.youth.co.kr.GlideApp;
 import youthshelter.youth.co.kr.R;
 import youthshelter.youth.co.kr.activity.Detail2Activity;
 import youthshelter.youth.co.kr.data.CultureData;
@@ -76,7 +77,12 @@ public class SecondFragmentRecyclerAdapter extends RecyclerView.Adapter<SecondFr
         holder.culture_location_TextView.setText(cultureData.getCultureLocation());
         holder.culture_name_TextView.setText(cultureData.getCultureName());
         holder.culture_playTime_TextView.setText(cultureData.getStart_date()+"  -  "+cultureData.getEnd_date());
-        Glide.with(context).load(cultureData.getImageName().toLowerCase()).thumbnail(0.1f).into(holder.culture_image_ImageView);
+        //Glide.with(context).load(cultureData.getImageName().toLowerCase()).thumbnail(0.1f).into(holder.culture_image_ImageView);
+        GlideApp.with(context).load(cultureData.getImageName().toLowerCase()).placeholder(R.drawable.no_image).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.2f).into(holder.culture_image_ImageView);
+
+        //GlideApp.with(context).load(storage.getReference().child("center").child(center.getImage()+"/0."+center.getFormat())).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.2f).into(holder.shelter_image_ImageView);
+
+
 
     }
 

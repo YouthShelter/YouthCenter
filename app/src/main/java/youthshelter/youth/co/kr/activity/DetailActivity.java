@@ -89,8 +89,6 @@ public class DetailActivity extends AppCompatActivity {
         ImageViewPagerAdapter viewPagerAdapter = new ImageViewPagerAdapter(getSupportFragmentManager(), this, center.getImage(), center.getCount(), center.getFormat());
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
-
-
     }
 
     private void initIndicaotor(int size) {

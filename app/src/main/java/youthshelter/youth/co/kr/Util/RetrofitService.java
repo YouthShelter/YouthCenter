@@ -5,7 +5,7 @@ import retrofit2.http.GET;
 
 public interface RetrofitService {
 
-    @GET("30/")
+    @GET("45/")
     Call<Response_Culture_Info.Example> GetInfo();
 
 }

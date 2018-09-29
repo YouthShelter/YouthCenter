@@ -19,11 +19,15 @@ import youthshelter.youth.co.kr.fragment.SecondFragment;
 public class ImageViewPagerAdapter extends FragmentPagerAdapter {
     private Context context;
     private Handler handler;
-    private ArrayList<Integer> imageURL;
-    public ImageViewPagerAdapter(FragmentManager fm, Context context, ArrayList<Integer> imageURL) {
+    private String imageURL;
+    private int count;
+    private String format;
+    public ImageViewPagerAdapter(FragmentManager fm, Context context, String imageURL, int count, String format) {
         super(fm);
         this.context = context;
         this.imageURL = imageURL;
+        this.count = count;
+        this.format = format;
     }
 
 
@@ -31,13 +35,13 @@ public class ImageViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         ImageFragment fragment = new ImageFragment();
         Bundle args = new Bundle();
-        args.putInt("imageURL", imageURL.get(position));
+        args.putString("imageURL", imageURL+"/"+position + "." + format);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override // ViewPager의 Page 수
     public int getCount() {
-        return imageURL.size();
+        return count;
     }
 }

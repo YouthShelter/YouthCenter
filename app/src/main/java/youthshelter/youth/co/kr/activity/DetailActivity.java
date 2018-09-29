@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ import youthshelter.youth.co.kr.data.YouthCenter;
 
 public class DetailActivity extends AppCompatActivity {
     private ViewPager viewPager;
-    private  YouthCenter center;
+    private YouthCenter center;
 
     private ArrayList<String> numberList;
 
@@ -42,7 +43,6 @@ public class DetailActivity extends AppCompatActivity {
     private TextView shelter_website_detail_TextView;
     private TextView shelter_like_detail_TextView;
 
-
     private LinearLayout shelter_tel_detail_LinearLayout;
     private LinearLayout shelter_website_detail_LinearLayout;
 
@@ -53,7 +53,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         center = (YouthCenter) getIntent().getSerializableExtra("center");
-
+        Log.i("tttttt", "~~" + center.toString());
         shelter_info_detail_TextView = (TextView) findViewById(R.id.shelter_info_detail_TextView);
         shelter_location_detail_TextView = (TextView) findViewById(R.id.shelter_location_detail_TextView);
         shelter_name_detail_TextView = (TextView) findViewById(R.id.shelter_name_detail_TextView);
@@ -67,13 +67,14 @@ public class DetailActivity extends AppCompatActivity {
         shelter_name_detail_TextView.setText(center.getName());
         shelter_location_detail_TextView.setText(center.getAddress());
         shelter_tel_detail_TextView.setText(center.getPhone());
-        shelter_like_detail_TextView.setText(center.getLike());
-        String info = "소개\n" + center.getIntroduction() + "\n\n정보\n" + center.getBonus() + "\n평일\n" + center.getWeekday() + "\n\n토요일\n" + center.getSaturday() + "\n\n일요일\n" + center.getSunday();
+        shelter_like_detail_TextView.setText(Integer.toString(center.getLike()));
+        String info = "※소개\n" + center.getIntroduction() + "\n\n※정보\n" + center.getBonus() + "\n\n※평일\n" + center.getWeekday() + "\n\n※토요일\n" + center.getSaturday() + "\n\n※일요일\n" + center.getSunday();
+        shelter_info_detail_TextView.setText(info);
         shelter_tel_detail_LinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:"+shelter_tel_detail_TextView.getText()));
+                intent.setData(Uri.parse("tel:" + shelter_tel_detail_TextView.getText()));
                 startActivity(intent);
             }
         });
@@ -81,29 +82,19 @@ public class DetailActivity extends AppCompatActivity {
         shelter_website_detail_LinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(center == null || center.getHomepage() == null){
-                    Toast.makeText(getApplicationContext(),"웹사이트를 지원하지 않는 장소 입니다.",Toast.LENGTH_SHORT).show();
-                }
-                else
+                if (center == null || center.getHomepage() == null) {
+                    Toast.makeText(getApplicationContext(), "웹사이트를 지원하지 않는 장소 입니다.", Toast.LENGTH_SHORT).show();
+                } else
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(center.getHomepage())));
             }
         });
 
-
-        Log.i("ttttt", center.getAddress());
-        ArrayList<Integer> imageURL = new ArrayList<>();
-
-        imageURL.add(R.drawable.heart);
-        imageURL.add(R.drawable.heart);
-        imageURL.add(R.drawable.heart);
-        imageURL.add(R.drawable.heart);
-        imageURL.add(R.drawable.heart);
         viewPager = (ViewPager) findViewById(R.id.imageViewPager);
         circleAnimIndicator = (CircleAnimIndicator) findViewById(R.id.circleAnimIndicator);
 
-        initIndicaotor(imageURL.size());
+        initIndicaotor(center.getCount());
 
-        ImageViewPagerAdapter viewPagerAdapter = new ImageViewPagerAdapter(getSupportFragmentManager(), this, imageURL);
+        ImageViewPagerAdapter viewPagerAdapter = new ImageViewPagerAdapter(getSupportFragmentManager(), this, center.getImage(), center.getCount(), center.getFormat());
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
 

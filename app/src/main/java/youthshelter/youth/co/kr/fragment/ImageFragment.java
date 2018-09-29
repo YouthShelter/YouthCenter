@@ -1,30 +1,25 @@
 package youthshelter.youth.co.kr.fragment;
 
 
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import java.io.File;
-import java.net.URI;
-import java.util.ArrayList;
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
 
+import youthshelter.youth.co.kr.GlideApp;
 import youthshelter.youth.co.kr.R;
-import youthshelter.youth.co.kr.adapter.FirstFragmentUserRecyclerAdapter;
-import youthshelter.youth.co.kr.data.YouthCenter;
 
 public class ImageFragment extends Fragment {
     private ImageView imageView;
-    private int imageURL;
+    private String imageURL;
+    private FirebaseStorage storage = FirebaseStorage.getInstance("gs://youthcenter-856cc.appspot.com");
     public ImageFragment(){
 
     }
@@ -39,9 +34,11 @@ public class ImageFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        imageURL = getArguments().getInt("imageURL");
+        imageURL = getArguments().getString("imageURL");
+        Log.i("tttttt",imageURL);
+        GlideApp.with(this).load(storage.getReference().child("center").child(imageURL)).thumbnail(0.1f).into(imageView);
 
-        imageView.setImageResource(imageURL);
+        //imageView.setImageResource(imageURL);
 
     }
 }

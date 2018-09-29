@@ -27,7 +27,6 @@ public class IntroActivity extends AppCompatActivity {
     DatabaseReference mRootRef;
     DatabaseReference mPostReference;
     ArrayList<YouthCenter> youthCenters = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +37,9 @@ public class IntroActivity extends AppCompatActivity {
         mPostReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.i("ttttt", dataSnapshot.getKey() + dataSnapshot.getChildrenCount() + "@@");
+                //Log.i("ttttt", dataSnapshot.getKey() + dataSnapshot.getChildrenCount() + "@@");
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Log.i("ttttt", snapshot.getKey() + "!!");
+                    //Log.i("ttttt", snapshot.getKey() + "!!");
                     YouthCenter center = snapshot.getValue(YouthCenter.class);
                     youthCenters.add(center);
                 }

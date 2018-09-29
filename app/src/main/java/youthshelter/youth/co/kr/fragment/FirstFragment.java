@@ -4,10 +4,8 @@ package youthshelter.youth.co.kr.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import youthshelter.youth.co.kr.R;
-import youthshelter.youth.co.kr.adapter.FirstFragmentUserRecyclerAdapter;
+import youthshelter.youth.co.kr.adapter.FirstFragmentCenterRecyclerAdapter;
 import youthshelter.youth.co.kr.data.YouthCenter;
 
 public class FirstFragment extends Fragment {
@@ -41,10 +39,8 @@ public class FirstFragment extends Fragment {
         }*/
         ArrayList<YouthCenter> youthCenters = (ArrayList<YouthCenter>)getArguments().getSerializable("centers");
 
-        for(YouthCenter center : youthCenters)
-            Log.i("tttttt",center.getName() + "~~~");
         firstRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        FirstFragmentUserRecyclerAdapter adapter = new FirstFragmentUserRecyclerAdapter(getActivity());
+        FirstFragmentCenterRecyclerAdapter adapter = new FirstFragmentCenterRecyclerAdapter(getActivity());
         firstRecyclerView.setAdapter(adapter);
 
         adapter.setItem(youthCenters);

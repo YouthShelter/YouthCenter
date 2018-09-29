@@ -2,36 +2,38 @@ package youthshelter.youth.co.kr.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Handler;
 
 
+import youthshelter.youth.co.kr.GlideApp;
 import youthshelter.youth.co.kr.R;
 import youthshelter.youth.co.kr.activity.DetailActivity;
 import youthshelter.youth.co.kr.data.YouthCenter;
 
-public class FirstFragmentUserRecyclerAdapter extends RecyclerView.Adapter<FirstFragmentUserRecyclerAdapter.UserViewHolder> {
+public class FirstFragmentCenterRecyclerAdapter extends RecyclerView.Adapter<FirstFragmentCenterRecyclerAdapter.UserViewHolder> {
     private ArrayList<YouthCenter> arrayList;
     private Activity context;
     private Handler handler;
-    public FirstFragmentUserRecyclerAdapter(Activity context) {
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    public FirstFragmentCenterRecyclerAdapter(Activity context) {
         this.context = context;
         arrayList = new ArrayList();
     }
-    public FirstFragmentUserRecyclerAdapter(Activity context, Handler handler) {
+    public FirstFragmentCenterRecyclerAdapter(Activity context, Handler handler) {
         this.context = context;
         this.handler = handler;
         arrayList = new ArrayList();
@@ -81,6 +83,7 @@ public class FirstFragmentUserRecyclerAdapter extends RecyclerView.Adapter<First
 
         @Override
         public void onClick(View v) {
+            Log.i("tttttt",arrayList.get(getLayoutPosition()).toString());
             Intent intent = new Intent(context,DetailActivity.class);
             intent.putExtra("center",arrayList.get(getLayoutPosition()));
             context.startActivity(intent);
@@ -136,7 +139,9 @@ public class FirstFragmentUserRecyclerAdapter extends RecyclerView.Adapter<First
             holder.shelter_playTime_TextView.setText(center.getWeekday());
         }
 
-        holder.shelter_like_TextView.setText(center.getLike()+"");
+        holder.shelter_like_TextView.setText(Integer.toString(center.getLike()));
+        GlideApp.with(context).load(storage.getReference().child("center").child(center.getImage()+"/0."+center.getFormat())).thumbnail(0.1f).into(holder.shelter_image_ImageView);
+
 
 
         /*holder.textView.setText(arrayList.get(position));
@@ -155,7 +160,7 @@ public class FirstFragmentUserRecyclerAdapter extends RecyclerView.Adapter<First
     }
 
     @Override
-    public FirstFragmentUserRecyclerAdapter.UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FirstFragmentCenterRecyclerAdapter.UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.data_center_recyclerview, parent, false);
         UserViewHolder userViewHolder = new UserViewHolder(view);

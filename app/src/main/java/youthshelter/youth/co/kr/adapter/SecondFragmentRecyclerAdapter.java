@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,7 @@ public class SecondFragmentRecyclerAdapter extends RecyclerView.Adapter<SecondFr
         holder.culture_name_TextView.setText(cultureData.getCultureName());
         holder.culture_playTime_TextView.setText(cultureData.getStart_date()+"  -  "+cultureData.getEnd_date());
         Glide.with(context).load(cultureData.getImageName().toLowerCase()).thumbnail(0.1f).into(holder.culture_image_ImageView);
+        Log.e("img url",""+cultureData.getImageName().toLowerCase());
     }
 
     @Override

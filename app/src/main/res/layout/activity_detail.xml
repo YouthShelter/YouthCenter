@@ -10,13 +10,14 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.45"
+        android:layout_weight="0.4"
         android:background="#000000">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/imageViewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
         <youthshelter.youth.co.kr.components.CircleAnimIndicator
             android:id="@+id/circleAnimIndicator"
             android:layout_width="wrap_content"
@@ -26,12 +27,148 @@
             android:layout_marginBottom="10dp" />
     </RelativeLayout>
 
-    <FrameLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.55">
+        android:layout_weight="0.5"
+        android:padding="20dp">
 
-    </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+                <TextView
+                    android:id="@+id/shelter_name_detail_TextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:gravity="center_vertical"
+                    android:text="무중력 지대"
+                    android:textSize="25sp" />
+
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.07"
+                    android:gravity="end|center_vertical"
+                    android:padding="5dp"
+                    android:src="@drawable/heart" />
+
+                <TextView
+                    android:id="@+id/shelter_like_TextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.13"
+                    android:gravity="center_vertical"
+                    android:textSize="15sp"
+                    android:text="1234" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/shelter_location_detail_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="10sp"
+                android:text="서울시 노원구" />
+
+            <!-- 라운드 정보 -->
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_layout"
+                android:weightSum="1.0"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/shelter_tel_detail_LinearLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:src="@drawable/tel" />
+                    <TextView
+                        android:id="@+id/shelter_tel_detail_TextView"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:gravity="center_vertical"
+                        android:layout_weight="0.5"
+                        android:text="전화 번호"
+                        android:textAlignment="center" />
+                </LinearLayout>
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#C4CDE0"/>
+                <LinearLayout
+                    android:id="@+id/shelter_website_detail_LinearLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:src="@drawable/website" />
+                    <TextView
+                        android:id="@+id/shelter_website_detail_TextView"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:gravity="center_vertical"
+                        android:layout_weight="0.5"
+                        android:text="홈페이지"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="운영시간 및 정보"
+                android:textSize="20sp"/>
+            <TextView
+                android:layout_marginTop="5dp"
+                android:id="@+id/shelter_info_detail_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="어쩌구 저쩌구어쩌구 저쩌구
+어쩌구 저쩌구어쩌구 저쩌구어쩌구 저쩌구어쩌구 저쩌구
+어쩌구 저쩌구어쩌구 저쩌구
+어쩌구 저쩌구
+어쩌구 저쩌구
+어쩌구 저쩌구어쩌구 저쩌구어쩌구 저쩌구
+어쩌구 저쩌구어쩌구 저쩌구
+어쩌구 저쩌구
+어쩌구 저쩌구
+어쩌구 저쩌구어쩌구 저쩌구어쩌구 저쩌구
+어쩌구 저쩌구어쩌구 저쩌구어쩌구 저쩌구어쩌구 저쩌구어쩌구 저쩌구어쩌구 저쩌구어쩌구 저쩌구
+"
+                android:textSize="10sp"/>
+        </LinearLayout>
+    </ScrollView>
+    <Button
+        android:layout_weight="0.1"
+        android:layout_width="match_parent"
+        android:text="지도"
+        android:layout_height="0dp" />
 
 </LinearLayout>

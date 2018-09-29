@@ -3,18 +3,13 @@ package youthshelter.youth.co.kr.adapter;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
 import java.util.ArrayList;
 
-import youthshelter.youth.co.kr.R;
-import youthshelter.youth.co.kr.fragment.FirstFragment;
 import youthshelter.youth.co.kr.fragment.ImageFragment;
-import youthshelter.youth.co.kr.fragment.SecondFragment;
 
 public class ImageViewPagerAdapter extends FragmentPagerAdapter {
     private Context context;
@@ -29,7 +24,6 @@ public class ImageViewPagerAdapter extends FragmentPagerAdapter {
         this.count = count;
         this.format = format;
     }
-
 
     @Override
     public Fragment getItem(int position) {

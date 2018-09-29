@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
@@ -140,7 +141,7 @@ public class FirstFragmentCenterRecyclerAdapter extends RecyclerView.Adapter<Fir
         }
 
         holder.shelter_like_TextView.setText(Integer.toString(center.getLike()));
-        GlideApp.with(context).load(storage.getReference().child("center").child(center.getImage()+"/0."+center.getFormat())).thumbnail(0.1f).into(holder.shelter_image_ImageView);
+        GlideApp.with(context).load(storage.getReference().child("center").child(center.getImage()+"/0."+center.getFormat())).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.2f).into(holder.shelter_image_ImageView);
 
 
 

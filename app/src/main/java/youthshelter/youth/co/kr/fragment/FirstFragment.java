@@ -38,7 +38,7 @@ public class FirstFragment extends Fragment {
             centers.add(new YouthCenter("1","더 플레이스","노원구","06:00 - 17:00",1234));
         }*/
         ArrayList<YouthCenter> youthCenters = (ArrayList<YouthCenter>)getArguments().getSerializable("centers");
-
+        firstRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         firstRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         FirstFragmentCenterRecyclerAdapter adapter = new FirstFragmentCenterRecyclerAdapter(getActivity());
         firstRecyclerView.setAdapter(adapter);

@@ -4,11 +4,9 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:foregroundGravity="center"
-    android:background="@color/color_main"
     >
     <ImageView
-        android:src="@drawable/shelter"
-        android:tint="#ffffff"
+        android:src="@drawable/splash"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:scaleType="centerCrop"

@@ -36,7 +36,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="10dp">
 
-                <TextView
+                <youthshelter.youth.co.kr.components.FontFitTextView
                     android:id="@+id/culture_name_TextView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -44,7 +44,6 @@
                     android:gravity="center_vertical"
                     android:text="우주"
                     android:maxLines="1"
-                    android:ellipsize="end"
                     android:textSize="20sp" />
 
                 <TextView

@@ -1,11 +1,13 @@
 package youthshelter.youth.co.kr.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import youthshelter.youth.co.kr.data.YouthCenter;
 
 public class FirstFragment extends Fragment {
     private RecyclerView firstRecyclerView;
+    private ArrayList<YouthCenter> youthCenters;
+    private FirstFragmentCenterRecyclerAdapter adapter;
     public FirstFragment(){
 
     }
@@ -30,17 +34,26 @@ public class FirstFragment extends Fragment {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.i("ttttttt",requestCode + " " + resultCode + " " +  data.getIntExtra("index",0) + " " + data.getIntExtra("count",0));
+        if(requestCode == 3000){
+            if(resultCode == 100){
+                int index = data.getIntExtra("index",0);
+                youthCenters.get(index).setLike(data.getIntExtra("count",0));
+                adapter.notifyItemChanged(index);
+            }
+        }
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-       /* ArrayList<YouthCenter> centers = new ArrayList<>();
-        for(int i=0; i<10; i++) {
-            centers.add(new YouthCenter("1","더 플레이스","노원구","06:00 - 17:00",1234));
-        }*/
-        ArrayList<YouthCenter> youthCenters = (ArrayList<YouthCenter>)getArguments().getSerializable("centers");
+
+        youthCenters = (ArrayList<YouthCenter>)getArguments().getSerializable("centers");
         firstRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         firstRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        FirstFragmentCenterRecyclerAdapter adapter = new FirstFragmentCenterRecyclerAdapter(getActivity());
+        adapter = new FirstFragmentCenterRecyclerAdapter(this);
         firstRecyclerView.setAdapter(adapter);
 
         adapter.setItem(youthCenters);

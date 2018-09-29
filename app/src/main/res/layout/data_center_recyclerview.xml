@@ -37,8 +37,9 @@
                 android:orientation="vertical"
                 android:paddingLeft="10dp">
 
-                <TextView
+                <youthshelter.youth.co.kr.components.FontFitTextView
                     android:id="@+id/shelter_name_TextView"
+                    android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.33"
@@ -63,7 +64,7 @@
 
                     <TextView
                         android:id="@+id/shelter_playTime_TextView"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="영업시간"
@@ -72,26 +73,27 @@
                         android:ellipsize="none"
                         android:scrollHorizontally="false"
                         android:singleLine="false"
-                        android:layout_weight="0.3"/>
+                        android:layout_weight="0.7"/>
 
-
-                        <ImageView
+                        <LinearLayout
+                            android:layout_weight="0.2"
                             android:layout_width="0dp"
+                            android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_width="15dp"
                             android:layout_height="match_parent"
-                            android:gravity="end|center_vertical"
-                            android:padding="5dp"
+                            android:gravity="center_vertical"
                             android:src="@drawable/heart"
-                            android:scaleType="fitEnd"
-                            android:layout_weight="0.6"
                             />
 
                         <TextView
                             android:id="@+id/shelter_like_TextView"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:paddingStart="5dp"
                             android:gravity="center_vertical"
-                            android:text="1234"
-                            android:layout_weight="0.1"/>
+                            android:text="1234"/>
+                        </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

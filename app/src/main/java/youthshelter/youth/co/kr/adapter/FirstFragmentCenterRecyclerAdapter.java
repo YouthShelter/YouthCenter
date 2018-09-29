@@ -20,24 +20,21 @@ import java.util.Calendar;
 import java.util.logging.Handler;
 
 
+import me.grantland.widget.AutofitTextView;
 import youthshelter.youth.co.kr.GlideApp;
 import youthshelter.youth.co.kr.R;
 import youthshelter.youth.co.kr.activity.DetailActivity;
 import youthshelter.youth.co.kr.data.YouthCenter;
+import youthshelter.youth.co.kr.fragment.FirstFragment;
 
 public class FirstFragmentCenterRecyclerAdapter extends RecyclerView.Adapter<FirstFragmentCenterRecyclerAdapter.UserViewHolder> {
     private ArrayList<YouthCenter> arrayList;
-    private Activity context;
+    private FirstFragment context;
     private Handler handler;
     private FirebaseStorage storage = FirebaseStorage.getInstance();
-    public FirstFragmentCenterRecyclerAdapter(Activity context) {
+    public FirstFragmentCenterRecyclerAdapter(FirstFragment context) {
         this.context = context;
-        arrayList = new ArrayList();
-    }
-    public FirstFragmentCenterRecyclerAdapter(Activity context, Handler handler) {
-        this.context = context;
-        this.handler = handler;
-        arrayList = new ArrayList();
+        arrayList = new ArrayList<YouthCenter>();
     }
     public void setItem(ArrayList<YouthCenter> centers){
         this.arrayList = centers;
@@ -85,9 +82,9 @@ public class FirstFragmentCenterRecyclerAdapter extends RecyclerView.Adapter<Fir
         @Override
         public void onClick(View v) {
             Log.i("tttttt",arrayList.get(getLayoutPosition()).toString());
-            Intent intent = new Intent(context,DetailActivity.class);
+            Intent intent = new Intent(context.getContext(),DetailActivity.class);
             intent.putExtra("center",arrayList.get(getLayoutPosition()));
-            context.startActivity(intent);
+            context.startActivityForResult(intent,3000);
         }
     }
 

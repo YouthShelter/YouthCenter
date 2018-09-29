@@ -33,9 +33,13 @@
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:overScrollMode="never"
-        android:padding="20dp">
+        android:scrollbars="none"
+        android:fillViewport="true"
+        android:paddingRight="20dp"
+        android:paddingLeft="20dp">
 
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -46,32 +50,40 @@
                 android:orientation="horizontal"
                 android:weightSum="1.0">
 
-                <TextView
+                <youthshelter.youth.co.kr.components.FontFitTextView
                     android:id="@+id/shelter_name_detail_TextView"
+                    android:maxLines="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.8"
+                    android:paddingEnd="10dp"
                     android:gravity="center_vertical"
                     android:text="무중력 지대"
                     android:textSize="25sp" />
 
-
-                <ImageView
+                <LinearLayout
+                    android:id="@+id/culture_like_detail_LinearLayout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.07"
-                    android:gravity="end|center_vertical"
+                    android:background="@drawable/round_layout"
+                    android:layout_weight="0.2">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
                     android:padding="5dp"
                     android:src="@drawable/heart" />
 
-                <TextView
+                <youthshelter.youth.co.kr.components.FontFitTextView
                     android:id="@+id/shelter_like_detail_TextView"
-                    android:layout_width="0dp"
+                    android:maxLines="1"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.13"
                     android:gravity="center_vertical"
                     android:text="1234"
                     android:textSize="15sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
@@ -175,8 +187,11 @@
         </LinearLayout>
     </ScrollView>
     <Button
+        android:id="@+id/shelter_map_detail_Button"
+        android:layout_margin="0dp"
         android:layout_weight="0.1"
         android:layout_width="match_parent"
+        android:background="@drawable/round_button_layout"
         android:text="지도"
         android:layout_height="0dp" />
 

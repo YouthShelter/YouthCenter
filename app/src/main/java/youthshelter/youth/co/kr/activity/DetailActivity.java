@@ -3,14 +3,25 @@ package youthshelter.youth.co.kr.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 
 import java.util.ArrayList;
 
@@ -23,8 +34,6 @@ public class DetailActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private YouthCenter center;
 
-    private ArrayList<String> numberList;
-
     private CircleAnimIndicator circleAnimIndicator;
 
     private TextView shelter_info_detail_TextView;
@@ -36,12 +45,35 @@ public class DetailActivity extends AppCompatActivity {
 
     private LinearLayout shelter_tel_detail_LinearLayout;
     private LinearLayout shelter_website_detail_LinearLayout;
+    private LinearLayout culture_like_detail_LinearLayout;
 
+    private Button shelter_map_detail_Button;
+
+    DatabaseReference mRootRef;
+    DatabaseReference mPostReference;
+
+    int index = 0;
+    int count = 0;
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent();
+        intent.putExtra("index", index);
+        intent.putExtra("count", count);
+        setResult(100, intent);
+
+        finish();
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+        mPostReference = mRootRef.child("center");
 
         center = (YouthCenter) getIntent().getSerializableExtra("center");
         Log.i("tttttt", "~~" + center.toString());
@@ -54,11 +86,77 @@ public class DetailActivity extends AppCompatActivity {
 
         shelter_tel_detail_LinearLayout = (LinearLayout) findViewById(R.id.shelter_tel_detail_LinearLayout);
         shelter_website_detail_LinearLayout = (LinearLayout) findViewById(R.id.shelter_website_detail_LinearLayout);
+        culture_like_detail_LinearLayout = (LinearLayout) findViewById(R.id.culture_like_detail_LinearLayout);
+
+        Button shelter_map_detail_Button = (Button) findViewById(R.id.shelter_map_detail_Button);
+        shelter_map_detail_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("geo:" + center.getLatitude() + "," + center.getLongitude() + "?q=" + center.getLatitude()  + "," + center.getLongitude()));
+                startActivity(intent);
+            }
+        });
+
+        culture_like_detail_LinearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPostReference.orderByChild("name").equalTo(center.getName()).addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        index = Integer.parseInt(dataSnapshot.getKey());
+                        mPostReference.child(dataSnapshot.getKey()).child("like").runTransaction(new Transaction.Handler() {
+                            @Override
+                            public Transaction.Result doTransaction(MutableData mutableData) {
+
+                                count = mutableData.getValue(Integer.class) + 1;
+                                shelter_like_detail_TextView.setText(Integer.toString(count));
+                                mutableData.setValue(count);
+
+                                return Transaction.success(mutableData);
+                            }
+
+                            @Override
+                            public void onComplete(
+                                    DatabaseError databaseError, boolean committed, DataSnapshot dataSnapshot) {
+                                System.out.println("Transaction completed");
+
+
+                            }
+                        });
+
+
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
 
         shelter_name_detail_TextView.setText(center.getName());
         shelter_location_detail_TextView.setText(center.getAddress());
         shelter_tel_detail_TextView.setText(center.getPhone());
         shelter_like_detail_TextView.setText(Integer.toString(center.getLike()));
+
         String info = "※소개\n" + center.getIntroduction() + "\n\n※정보\n" + center.getBonus() + "\n\n※평일\n" + center.getWeekday() + "\n\n※토요일\n" + center.getSaturday() + "\n\n※일요일\n" + center.getSunday();
         shelter_info_detail_TextView.setText(info);
         shelter_tel_detail_LinearLayout.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +187,11 @@ public class DetailActivity extends AppCompatActivity {
         ImageViewPagerAdapter viewPagerAdapter = new ImageViewPagerAdapter(getSupportFragmentManager(), this, center.getImage(), center.getCount(), center.getFormat());
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void initIndicaotor(int size) {

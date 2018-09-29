@@ -61,6 +61,8 @@ public class YouthCenter implements Serializable {
     private String saturday;
     private String sunday;
     private String weekday;
+    private double latitude;
+    private double longitude;
 }
 
 

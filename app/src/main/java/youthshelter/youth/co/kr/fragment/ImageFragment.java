@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.storage.FirebaseStorage;
 
 import youthshelter.youth.co.kr.GlideApp;
@@ -36,7 +37,7 @@ public class ImageFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         imageURL = getArguments().getString("imageURL");
         Log.i("tttttt",imageURL);
-        GlideApp.with(this).load(storage.getReference().child("center").child(imageURL)).thumbnail(0.1f).into(imageView);
+        GlideApp.with(this).load(storage.getReference().child("center").child(imageURL)).placeholder(R.drawable.no_image2).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.1f).into(imageView);
 
         //imageView.setImageResource(imageURL);
 

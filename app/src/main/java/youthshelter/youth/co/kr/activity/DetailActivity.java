@@ -6,10 +6,15 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -35,6 +40,9 @@ public class DetailActivity extends AppCompatActivity {
     private LinearLayout shelter_tel_detail_LinearLayout;
     private LinearLayout shelter_website_detail_LinearLayout;
 
+    DatabaseReference mRootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference conditionRef = mRootRef.child("text");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +57,7 @@ public class DetailActivity extends AppCompatActivity {
 
         shelter_tel_detail_LinearLayout = (LinearLayout) findViewById(R.id.shelter_tel_detail_LinearLayout);
         shelter_website_detail_LinearLayout = (LinearLayout) findViewById(R.id.shelter_website_detail_LinearLayout);
+
 
         shelter_tel_detail_LinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override

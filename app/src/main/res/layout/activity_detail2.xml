@@ -27,10 +27,16 @@
             <!--android:layout_centerHorizontal="true"-->
             <!--android:layout_marginBottom="10dp" />-->
 
-        <ImageView
+        <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/detail_imageview"/>-->
+
+        <com.github.chrisbanes.photoview.PhotoView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/detail_imageview"/>
+
     </RelativeLayout>
 
 

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,10 @@ public class Detail2Activity extends AppCompatActivity {
     private LinearLayout culture_tel_detail_LinearLayout;
     private LinearLayout culture_website_detail_LinearLayout;
 
+    private PhotoView photoView;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +52,8 @@ public class Detail2Activity extends AppCompatActivity {
 
         cultureData = (CultureData)getIntent().getSerializableExtra("culture");
 
-        culture_detail_imageview = (ImageView)findViewById(R.id.detail_imageview);
+        //culture_detail_imageview = (ImageView)findViewById(R.id.detail_imageview);
+        photoView = (PhotoView)findViewById(R.id.detail_imageview);
 
         culture_info_detail_TextView = (TextView)findViewById(R.id.culture_info_detail_TextView);
         culture_location_detail_TextView = (TextView)findViewById(R.id.culture_location_detail_TextView);
@@ -86,7 +92,7 @@ public class Detail2Activity extends AppCompatActivity {
         });
 
         //Glide.with(this).load(cultureData.getImageName().toLowerCase()).thumbnail(0.1f).into(culture_detail_imageview);
-        GlideApp.with(this).load(cultureData.getImageName().toLowerCase()).placeholder(R.drawable.no_image).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.2f).into(culture_detail_imageview);
+        GlideApp.with(this).load(cultureData.getImageName().toLowerCase()).placeholder(R.drawable.no_image2).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.2f).into(photoView);
 
 
     }

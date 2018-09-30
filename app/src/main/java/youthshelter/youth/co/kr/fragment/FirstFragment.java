@@ -145,7 +145,6 @@ public class FirstFragment extends Fragment {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
                 String text = searchCustomDialog.getAddCategoryStr();
-                Log.i("text!!!!",text);
                 setArrayBySearch(text);
             }
         });
@@ -191,7 +190,6 @@ public class FirstFragment extends Fragment {
         filteringCenters.clear();
         isFiltering = true;
         tempCenters = filteringCenters;
-        Log.i("ttttttttt","setting!!" + text);
         for (YouthCenter youthCenter : youthCenters) {
             if (youthCenter.getName().contains(text)) {
                 filteringCenters.add(youthCenter);

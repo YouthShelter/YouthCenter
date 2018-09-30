@@ -81,7 +81,6 @@ public class SearchCustomDialog extends Dialog {
             @Override
             public void onClick(View view) {
                 result = editText.getText().toString();
-                Log.i("tttttttttttttttttt","text~~!" + result);
                 if(result=="")
                     result="   ";
                 dismiss();

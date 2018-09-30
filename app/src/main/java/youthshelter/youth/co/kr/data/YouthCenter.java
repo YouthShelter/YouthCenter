@@ -33,8 +33,9 @@ public class YouthCenter implements Serializable {
 
 package youthshelter.youth.co.kr.data;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -63,6 +64,9 @@ public class YouthCenter implements Serializable {
     private String weekday;
     private double latitude;
     private double longitude;
+
+    @Exclude
+    private double distance;
 }
 
 

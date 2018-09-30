@@ -1,6 +1,5 @@
 package youthshelter.youth.co.kr.adapter;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -19,8 +17,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Handler;
 
-
-import me.grantland.widget.AutofitTextView;
 import youthshelter.youth.co.kr.GlideApp;
 import youthshelter.youth.co.kr.R;
 import youthshelter.youth.co.kr.activity.DetailActivity;
@@ -47,7 +43,7 @@ public class FirstFragmentCenterRecyclerAdapter extends RecyclerView.Adapter<Fir
         TextView shelter_like_TextView;
         TextView shelter_playTime_TextView;
         CardView cardView;
-
+        TextView shelter_distance_TextView;
         public UserViewHolder(View itemView) {
             super(itemView);
             shelter_image_ImageView = (ImageView) itemView.findViewById(R.id.shelter_image_ImageView);
@@ -55,6 +51,7 @@ public class FirstFragmentCenterRecyclerAdapter extends RecyclerView.Adapter<Fir
             shelter_name_TextView = (TextView) itemView.findViewById(R.id.shelter_name_TextView);
             shelter_like_TextView = (TextView) itemView.findViewById(R.id.shelter_like_TextView);
             shelter_playTime_TextView = (TextView) itemView.findViewById(R.id.shelter_playTime_TextView);
+            shelter_distance_TextView = (TextView)  itemView.findViewById(R.id.shelter_distance_TextView);
             cardView = (CardView) itemView.findViewById(R.id.dataCenter_recycler_view);
             cardView.setOnClickListener(this);
            /* cardView.setOnTouchListener(new View.OnTouchListener() {
@@ -138,7 +135,7 @@ public class FirstFragmentCenterRecyclerAdapter extends RecyclerView.Adapter<Fir
         }
 
         holder.shelter_like_TextView.setText(Integer.toString(center.getLike()));
-        GlideApp.with(context).load(storage.getReference().child("center").child(center.getImage()+"/0."+center.getFormat())).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.2f).into(holder.shelter_image_ImageView);
+        GlideApp.with(context).load(storage.getReference().child("center").child(center.getImage()+"/0."+center.getFormat())).placeholder(R.drawable.no_image2).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.shelter_image_ImageView);
 
 
 

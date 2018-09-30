@@ -101,6 +101,7 @@ public class DetailActivity extends AppCompatActivity {
         culture_like_detail_LinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                shelter_like_detail_TextView.setText(Integer.parseInt(shelter_like_detail_TextView.getText().toString())+1+"");
                 mPostReference.orderByChild("name").equalTo(center.getName()).addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -130,7 +131,8 @@ public class DetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                        int like = dataSnapshot.child("like").getValue(Integer.class);
+                        shelter_like_detail_TextView.setText(Integer.toString(like));
                     }
 
                     @Override

@@ -35,26 +35,39 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.75"
                 android:orientation="vertical"
-                android:paddingLeft="10dp">
+                android:paddingStart="10dp">
 
-                <youthshelter.youth.co.kr.components.FontFitTextView
+                <TextView
+                    android:textColor="#000000"
                     android:id="@+id/shelter_name_TextView"
-                    android:singleLine="true"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.33"
                     android:gravity="center_vertical"
                     android:text="우주"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/shelter_location_TextView"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.33"
-                    android:gravity="center_vertical"
-                    android:text="서울시 노원구"
-                    android:textSize="10sp" />
+                    android:layout_weight="0.33">
+                    <youthshelter.youth.co.kr.components.FontFitTextView
+                        android:id="@+id/shelter_location_TextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="0.83"
+                        android:text="서울시 노원구" />
+                    <TextView
+                        android:id="@+id/shelter_distance_TextView"
+                        android:visibility="invisible"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_weight="0.17"
+                        android:text="10KM"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -68,7 +81,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="영업시간"
-                        android:textSize="10sp"
+                        android:textSize="12sp"
                         android:maxLines="100"
                         android:ellipsize="none"
                         android:scrollHorizontally="false"

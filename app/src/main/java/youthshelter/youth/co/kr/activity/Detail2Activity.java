@@ -66,7 +66,10 @@ public class Detail2Activity extends AppCompatActivity {
 
         culture_info_detail_TextView.setText("※소개\n"+ cultureData.getCultureName() + "\n\n※정보\n"+ cultureData.getCultureprogram() + "\n\n※시간\n" + cultureData.getStart_date() + " - " + cultureData.getEnd_date() + "\n" + cultureData.getCulturePlayTime());
         culture_location_detail_TextView.setText(cultureData.getCultureLocation());
-        culture_tel_detail_TextView.setText(cultureData.getCultureTel());
+        if(cultureData.getCultureTel().length() == 9 || cultureData.getCultureTel().length() == 8)
+            culture_tel_detail_TextView.setText("02-" + cultureData.getCultureTel());
+        else
+            culture_tel_detail_TextView.setText(cultureData.getCultureTel());
 //      culture_website_detail_TextView.setText(cultureData.getCultureWebSite());
         culture_name_detail_TextView.setText(cultureData.getCultureName());
 

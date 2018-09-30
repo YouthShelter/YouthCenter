@@ -75,8 +75,11 @@ public class SecondFragmentRecyclerAdapter extends RecyclerView.Adapter<SecondFr
 
         CultureData cultureData = arrayList.get(position);
         holder.culture_location_TextView.setText(cultureData.getCultureLocation());
-        holder.culture_name_TextView.setText(cultureData.getCultureName());
-        holder.culture_playTime_TextView.setText(cultureData.getStart_date()+"  -  "+cultureData.getEnd_date());
+        String text = cultureData.getCultureName().replace("&#39;","").replace("［","[").replace("］","]");
+        if(text.charAt(0) == ' ')
+            text = text.substring(1);
+        holder.culture_name_TextView.setText(text);
+        holder.culture_playTime_TextView.setText(cultureData.getStart_date()+" ~ "+cultureData.getEnd_date());
         //Glide.with(context).load(cultureData.getImageName().toLowerCase()).thumbnail(0.1f).into(holder.culture_image_ImageView);
         GlideApp.with(context).load(cultureData.getImageName().toLowerCase()).placeholder(R.drawable.no_image2).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.2f).into(holder.culture_image_ImageView);
 

@@ -34,26 +34,28 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.75"
                 android:orientation="vertical"
-                android:paddingLeft="10dp">
+                android:paddingStart="10dp">
 
-                <youthshelter.youth.co.kr.components.FontFitTextView
+                <TextView
                     android:id="@+id/culture_name_TextView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.33"
+                    android:textColor="#000000"
                     android:gravity="center_vertical"
                     android:text="우주"
                     android:maxLines="1"
+                    android:ellipsize="end"
                     android:textSize="20sp" />
 
-                <TextView
+                <youthshelter.youth.co.kr.components.FontFitTextView
                     android:id="@+id/culture_location_TextView"
+                    android:textColor="#000000"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="0.33"
                     android:gravity="center_vertical"
-                    android:text="서울시 노원구"
-                    android:textSize="10sp" />
+                    android:text="서울시 노원구"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -67,7 +69,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:text="영업시간"
-                        android:textSize="10sp"
+                        android:textSize="12sp"
                         android:layout_weight="0.3"/>
 
                 </LinearLayout>

@@ -81,6 +81,7 @@ public class FirstFragmentCenterRecyclerAdapter extends RecyclerView.Adapter<Fir
             Log.i("tttttt",arrayList.get(getLayoutPosition()).toString());
             Intent intent = new Intent(context.getContext(),DetailActivity.class);
             intent.putExtra("center",arrayList.get(getLayoutPosition()));
+            intent.putExtra("index",getLayoutPosition());
             context.startActivityForResult(intent,3000);
         }
     }

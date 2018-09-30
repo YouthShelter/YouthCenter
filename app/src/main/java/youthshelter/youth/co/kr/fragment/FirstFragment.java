@@ -24,25 +24,35 @@ import youthshelter.youth.co.kr.data.YouthCenter;
 public class FirstFragment extends Fragment {
     private RecyclerView firstRecyclerView;
     private ArrayList<YouthCenter> youthCenters;
+    private ArrayList<YouthCenter> filteringCenters;
     private FirstFragmentCenterRecyclerAdapter adapter;
-    public FirstFragment(){
+    private boolean isFiltering = false;
+
+    public FirstFragment() {
 
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_first, container, false);
-        firstRecyclerView = (RecyclerView)view.findViewById(R.id.firstRecyclerView);
+        firstRecyclerView = (RecyclerView) view.findViewById(R.id.firstRecyclerView);
         return view;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("ttttttt",requestCode + " " + resultCode + " " +  data.getIntExtra("index",0) + " " + data.getIntExtra("count",0));
-        if(requestCode == 3000){
-            if(resultCode == 100){
-                int index = data.getIntExtra("index",0);
-                youthCenters.get(index).setLike(data.getIntExtra("count",0));
+        Log.i("ttttttt", requestCode + " " + resultCode + " " + data.getIntExtra("index", 0) + " " + data.getIntExtra("count", 0));
+        if (requestCode == 3000) {
+            if (resultCode == 100) {
+                int index = data.getIntExtra("index", 0);
+                if(isFiltering){
+                    filteringCenters.get(index).setLike(data.getIntExtra("count", 0));
+                }
+                else{
+                    youthCenters.get(index).setLike(data.getIntExtra("count", 0));
+                }
+
                 adapter.notifyItemChanged(index);
             }
         }
@@ -52,27 +62,41 @@ public class FirstFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
-        youthCenters = (ArrayList<YouthCenter>)getArguments().getSerializable("centers");
+        filteringCenters = new ArrayList<>();
+        youthCenters = (ArrayList<YouthCenter>) getArguments().getSerializable("centers");
         firstRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         firstRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new FirstFragmentCenterRecyclerAdapter(this);
         firstRecyclerView.setAdapter(adapter);
 
 
-        sortByName(youthCenters);
+        //sortByName(youthCenters);
         adapter.setItem(youthCenters);
+        //setArrayBySearch("도봉");
     }
-    public void sortByName(ArrayList<YouthCenter> youthCenters){
-        Collections.sort(youthCenters, new Comparator<YouthCenter>(){
+
+    public void setArrayBySearch(String text) {
+        isFiltering = true;
+        filteringCenters.clear();
+        for (YouthCenter youthCenter : youthCenters) {
+            if (youthCenter.getName().contains(text)) {
+                filteringCenters.add(youthCenter);
+            }
+        }
+        adapter.setItem(filteringCenters);
+    }
+
+    public void sortByName(ArrayList<YouthCenter> youthCenters) {
+        Collections.sort(youthCenters, new Comparator<YouthCenter>() {
             public int compare(YouthCenter obj1, YouthCenter obj2) {
                 // ## Ascending order
                 return obj1.getName().compareToIgnoreCase(obj2.getName());
             }
         });
     }
-    public void sortByDistance(ArrayList<YouthCenter> youthCenters){
-        Collections.sort(youthCenters, new Comparator<YouthCenter>(){
+
+    public void sortByDistance(ArrayList<YouthCenter> youthCenters) {
+        Collections.sort(youthCenters, new Comparator<YouthCenter>() {
             public int compare(YouthCenter obj1, YouthCenter obj2) {
                 // ## Ascending order
                 return Double.valueOf(obj1.getDistance()).compareTo(obj2.getDistance());
@@ -80,8 +104,9 @@ public class FirstFragment extends Fragment {
         });
 
     }
-    public void sortByLike(ArrayList<YouthCenter> youthCenters){
-        Collections.sort(youthCenters, new Comparator<YouthCenter>(){
+
+    public void sortByLike(ArrayList<YouthCenter> youthCenters) {
+        Collections.sort(youthCenters, new Comparator<YouthCenter>() {
             public int compare(YouthCenter obj1, YouthCenter obj2) {
                 // ## Ascending order
                 return Integer.valueOf(obj2.getLike()).compareTo(obj1.getLike());

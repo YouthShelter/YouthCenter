@@ -53,14 +53,13 @@ public class DetailActivity extends AppCompatActivity {
     DatabaseReference mRootRef;
     DatabaseReference mPostReference;
 
-    int index = 0;
     int count = 0;
 
     @Override
     public void onBackPressed() {
 
         Intent intent = new Intent();
-        intent.putExtra("index", index);
+        intent.putExtra("index", getIntent().getIntExtra("index",0));
         intent.putExtra("count", count);
         setResult(100, intent);
 
@@ -94,7 +93,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("geo:" + center.getLatitude() + "," + center.getLongitude() + "?q=" + center.getLatitude()  + "," + center.getLongitude()+"(" + center.getName() + ")"));
+                        Uri.parse("geo:" + center.getLatitude() + "," + center.getLongitude() + "?q=" + center.getLatitude() + "," + center.getLongitude() + "(" + center.getName() + ")"));
                 startActivity(intent);
             }
         });
@@ -102,11 +101,10 @@ public class DetailActivity extends AppCompatActivity {
         culture_like_detail_LinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shelter_like_detail_TextView.setText(Integer.parseInt(shelter_like_detail_TextView.getText().toString())+1+"");
+                shelter_like_detail_TextView.setText(Integer.parseInt(shelter_like_detail_TextView.getText().toString()) + 1 + "");
                 mPostReference.orderByChild("name").equalTo(center.getName()).addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        index = Integer.parseInt(dataSnapshot.getKey());
                         mPostReference.child(dataSnapshot.getKey()).child("like").runTransaction(new Transaction.Handler() {
                             @Override
                             public Transaction.Result doTransaction(MutableData mutableData) {

@@ -13,6 +13,6 @@
  우리는 위와 같은 자료들을 통해 기존 청년공간의 문제점에 대해 인식하였고, 이를 해결 할 수 있는 방법에 대해 생각해보았다. 그 결과 청년들의 접근성이 높은 app을 통해 정보를 제공해준다면 이러한 문제가 해결될 것이라고 생각하여 개발하게 되었다. 
 ## Application
 
-![default](https://user-images.githubusercontent.com/19161231/46258572-1ce54d80-c508-11e8-8806-6ea0c9855069.jpg)
-![default](https://user-images.githubusercontent.com/19161231/46258577-2c649680-c508-11e8-8c64-f779267463e8.jpg)
-![default](https://user-images.githubusercontent.com/19161231/46258581-3ab2b280-c508-11e8-8da0-f5b30d678907.jpg)
+![default](https://user-images.githubusercontent.com/19161231/46258572-1ce54d80-c508-11e8-8806-6ea0c9855069.jpg){: width="30%" height="30%"}
+![default](https://user-images.githubusercontent.com/19161231/46258577-2c649680-c508-11e8-8c64-f779267463e8.jpg){: width="30%" height="30%"}
+![default](https://user-images.githubusercontent.com/19161231/46258581-3ab2b280-c508-11e8-8da0-f5b30d678907.jpg){: width="30%" height="30%"}

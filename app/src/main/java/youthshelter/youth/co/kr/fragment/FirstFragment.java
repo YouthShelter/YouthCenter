@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 import youthshelter.youth.co.kr.R;
 import youthshelter.youth.co.kr.adapter.FirstFragmentCenterRecyclerAdapter;
@@ -56,6 +59,33 @@ public class FirstFragment extends Fragment {
         adapter = new FirstFragmentCenterRecyclerAdapter(this);
         firstRecyclerView.setAdapter(adapter);
 
+
+        sortByName(youthCenters);
         adapter.setItem(youthCenters);
+    }
+    public void sortByName(ArrayList<YouthCenter> youthCenters){
+        Collections.sort(youthCenters, new Comparator<YouthCenter>(){
+            public int compare(YouthCenter obj1, YouthCenter obj2) {
+                // ## Ascending order
+                return obj1.getName().compareToIgnoreCase(obj2.getName());
+            }
+        });
+    }
+    public void sortByDistance(ArrayList<YouthCenter> youthCenters){
+        Collections.sort(youthCenters, new Comparator<YouthCenter>(){
+            public int compare(YouthCenter obj1, YouthCenter obj2) {
+                // ## Ascending order
+                return Double.valueOf(obj1.getDistance()).compareTo(obj2.getDistance());
+            }
+        });
+
+    }
+    public void sortByLike(ArrayList<YouthCenter> youthCenters){
+        Collections.sort(youthCenters, new Comparator<YouthCenter>(){
+            public int compare(YouthCenter obj1, YouthCenter obj2) {
+                // ## Ascending order
+                return Integer.valueOf(obj2.getLike()).compareTo(obj1.getLike());
+            }
+        });
     }
 }

@@ -93,7 +93,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("geo:" + center.getLatitude() + "," + center.getLongitude() + "?q=" + center.getLatitude()  + "," + center.getLongitude()));
+                        Uri.parse("geo:" + center.getLatitude() + "," + center.getLongitude() + "?q=" + center.getLatitude()  + "," + center.getLongitude()+"(" + center.getName() + ")"));
                 startActivity(intent);
             }
         });

@@ -136,7 +136,7 @@ public class FirstFragmentCenterRecyclerAdapter extends RecyclerView.Adapter<Fir
         }
 
         holder.shelter_like_TextView.setText(Integer.toString(center.getLike()));
-        GlideApp.with(context).load(storage.getReference().child("center").child(center.getImage()+"/0."+center.getFormat())).placeholder(R.drawable.noimage).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.shelter_image_ImageView);
+        GlideApp.with(context).load(storage.getReference().child("center").child(center.getImage()+"/0."+center.getFormat())).centerCrop().placeholder(R.drawable.noimage).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.shelter_image_ImageView);
 
 
 

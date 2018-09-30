@@ -158,17 +158,28 @@ public class SetMapActivity extends AppCompatActivity {
 
                     Intent intent = new Intent();
                     ArrayList<Address> titles = geocodeUtil.getAddressListUsingGeolocation(new GeocodeUtil.GeoLocation(latitude,longitude));
-                    if(titles.size() != 0) {
-                        intent.putExtra("title", titles.get(0).getThoroughfare().toString());
-                        intent.putExtra("lat", latitude);
-                        intent.putExtra("lon", longitude);
-                        Log.i("yeah", titles.get(0).getThoroughfare());
-                        setResult(RESULT_OK, intent);
+                    if(titles.size() != 0) {// 37.60277220158049 ,127.0976283341229
+                        Address address =  titles.get(0);
+                        if(address!=null) {
+                            if(address.getThoroughfare()== null){
+                                Toast.makeText(view.getContext(),"현재 정확한 위치를 찾을 수 없습니다.",Toast.LENGTH_LONG);
+                                intent.putExtra("title", address.getThoroughfare().split(" ")[1]);
+                            }else {
+                                intent.putExtra("title", address.getThoroughfare());
+                            }
+                            intent.putExtra("lat", latitude);
+                            intent.putExtra("lon", longitude);
+                            Log.i("yeah", titles.get(0).toString());
+                            setResult(RESULT_OK, intent);
 
-                        finish();
+                            finish();
+                        }else{
+                            Toast.makeText(view.getContext(),"현재 위치를 찾을 수 없습니다.",Toast.LENGTH_LONG);
+                        }
                     }else{
                         Toast.makeText(view.getContext(),"현재 위치를 찾을 수 없습니다.",Toast.LENGTH_LONG);
                     }
+                    Log.i("lat",latitude+" ,"+longitude);
                 } else {
                     // GPS 를 사용할수 없으므로
                     gps.showSettingsAlert();

@@ -158,13 +158,13 @@
                 android:textSize="20sp"/>
             <TextView
                 android:layout_marginTop="5dp"
-                android:textColor="#8D8D8D"
                 android:id="@+id/culture_info_detail_TextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textIsSelectable="true"
-                android:text="내용@@@@@@"
-                android:textSize="10sp"/>
+                android:textColor="#646464"
+                android:text="rrr"
+                android:textSize="14sp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

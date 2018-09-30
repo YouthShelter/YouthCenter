@@ -213,9 +213,9 @@
                 android:layout_height="wrap_content"
                 android:textIsSelectable="true"
                 android:layout_marginTop="5dp"
-                android:textColor="#8D8D8D"
+                android:textColor="#646464"
                 android:text="rrr"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </ScrollView>
 

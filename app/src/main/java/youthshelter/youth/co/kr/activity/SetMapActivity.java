@@ -144,9 +144,9 @@ public class SetMapActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                /*if(!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     alertCheckGPS();
-                }
+                }*/
 
                 //MainActivity.checkLocationPermission(view.getContext(), SetMapActivity.this);
                 gps = new GpsInfo(view.getContext());

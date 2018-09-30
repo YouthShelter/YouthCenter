@@ -11,7 +11,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal|clip_vertical"
         android:padding="10.0dip"
-        android:text="위치설정"
+        android:text="어디에 있나요"
         android:textAppearance="?android:textAppearanceMedium"
         android:textStyle="bold" />
 
@@ -19,7 +19,7 @@
         android:id="@+id/search_ImageView"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginRight="40dp"
         android:tint="#ffffff"
         android:layout_gravity="end|center_vertical"
         android:src="@drawable/ic_search_black_24dp" />

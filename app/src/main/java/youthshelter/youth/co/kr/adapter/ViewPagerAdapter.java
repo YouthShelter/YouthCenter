@@ -56,9 +56,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position) {
             case 0:
-                return context.getResources().getString(R.string.firstFragment);
+                return null;//context.getResources().getString(R.string.firstFragment);
             case 1:
-                return context.getResources().getString(R.string.secondFragment);
+                return null;//context.getResources().getString(R.string.secondFragment);
             default:
                 return null;
         }

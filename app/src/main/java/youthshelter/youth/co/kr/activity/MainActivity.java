@@ -22,8 +22,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
 import java.util.ArrayList;
 
+import youthshelter.youth.co.kr.GlideApp;
 import youthshelter.youth.co.kr.adapter.ViewPagerAdapter;
 import youthshelter.youth.co.kr.R;
 import youthshelter.youth.co.kr.components.CustomViewPager;
@@ -63,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.main_tabLayout);
         tabLayout.setupWithViewPager(viewPager);
+        //GlideApp.with(this).load(R.drawable.shelter_tab).centerCrop().placeholder(R.drawable.noimage).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.shelter_image_ImageView);
+        //GlideApp.with(this).load(R.drawable.culture_tab).centerCrop().placeholder(R.drawable.noimage).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.shelter_image_ImageView);
+        tabLayout.getTabAt(0).setCustomView(R.layout.tab_button_layout);
+        tabLayout.getTabAt(1).setCustomView(R.layout.tab_button_layout2);
 
     }
 

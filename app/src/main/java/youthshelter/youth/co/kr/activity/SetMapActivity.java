@@ -163,7 +163,7 @@ public class SetMapActivity extends AppCompatActivity {
                         if(address!=null) {
                             if(address.getThoroughfare()== null){
                                 Toast.makeText(view.getContext(),"현재 정확한 위치를 찾을 수 없습니다.",Toast.LENGTH_LONG);
-                                intent.putExtra("title", address.getThoroughfare().split(" ")[1]);
+                                intent.putExtra("title", address.getAddressLine(0).split(" ")[1]);
                             }else {
                                 intent.putExtra("title", address.getThoroughfare());
                             }

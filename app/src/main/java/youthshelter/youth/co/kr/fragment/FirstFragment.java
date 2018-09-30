@@ -81,7 +81,7 @@ public class FirstFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.i("ttttttt", requestCode + " " + resultCode + " " + data.getIntExtra("index", 0) + " " + data.getIntExtra("count", 0));
+        //Log.i("ttttttt", requestCode + " " + resultCode + " " + data.getIntExtra("index", 0) + " " + data.getIntExtra("count", 0));
         if (requestCode == 3000) {
             if (resultCode == 100) {
                 int index = data.getIntExtra("index", 0);
@@ -96,13 +96,15 @@ public class FirstFragment extends Fragment {
                 title = data.getStringExtra("title");
                 myLat = data.getDoubleExtra("lat", 0);
                 myLon = data.getDoubleExtra("lon", 0);
-                positionTextView.setText(title);
-                for (YouthCenter youthCenter_data : tempCenters) {
-                    youthCenter_data.setDistance(DistanceByDegree(myLat, myLon, youthCenter_data.getLatitude(), youthCenter_data.getLongitude()));
-                    youthCenter_data.setCalcDistance(true);
-                    //Log.e("Distance",""+DistanceByDegree(myLat,myLon, youthCenter_data.getLatitude(),youthCenter_data.getLongitude())+" km");
+                if(title !=null && myLat !=0 && myLon != 0) {
+                    positionTextView.setText(title);
+                    for (YouthCenter youthCenter_data : tempCenters) {
+                        youthCenter_data.setDistance(DistanceByDegree(myLat, myLon, youthCenter_data.getLatitude(), youthCenter_data.getLongitude()));
+                        youthCenter_data.setCalcDistance(true);
+                        //Log.e("Distance",""+DistanceByDegree(myLat,myLon, youthCenter_data.getLatitude(),youthCenter_data.getLongitude())+" km");
+                    }
+                    adapter.notifyDataSetChanged();
                 }
-                adapter.notifyDataSetChanged();
             }
         }
     }

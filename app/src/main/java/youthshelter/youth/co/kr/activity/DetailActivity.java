@@ -61,6 +61,7 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra("index", getIntent().getIntExtra("index",0));
         intent.putExtra("count", count);
+        //Log.i("tttttttttttt",getIntent().getIntExtra("index",0) + " " + count + "!!!!");
         setResult(100, intent);
 
         finish();

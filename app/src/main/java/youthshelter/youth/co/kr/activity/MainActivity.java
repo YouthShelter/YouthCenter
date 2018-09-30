@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
@@ -18,6 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -34,41 +36,27 @@ public class MainActivity extends AppCompatActivity {
 
     private MessageHandler messageHandler;
     //private ActionBar
-    private TextView positionTextView;
-    private String title;
-    private double myLat = 0;
-    private double myLon = 0;
 
-    private final int SET_MAP = 0;
+
 
     ArrayList<YouthCenter> youthCenters;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         checkLocationPermission(this, MainActivity.this);
-        youthCenters = ( ArrayList<YouthCenter>)getIntent().getSerializableExtra("centers");
-        Log.i("tttttt",youthCenters.size()+"");
+        youthCenters = (ArrayList<YouthCenter>) getIntent().getSerializableExtra("centers");
+        Log.i("tttttt", youthCenters.size() + "");
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.action_bar_main);
         View view = getSupportActionBar().getCustomView();
 
-        positionTextView = (TextView)view.findViewById(R.id.position);
-
-        positionTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SetMapActivity.class);
-                startActivityForResult(intent, SET_MAP);
-                overridePendingTransition(0, 0);
-            }
-        });
-
         messageHandler = new MessageHandler();
         viewPager = (CustomViewPager) findViewById(R.id.main_viewPager);
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this, messageHandler,youthCenters);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this, messageHandler, youthCenters);
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setSwipeEnabled(false);
 
@@ -117,19 +105,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data){
-        switch(requestCode){
-            case SET_MAP:
-                if (resultCode== RESULT_OK){
-                    title = data.getStringExtra("title");
-                    myLat = data.getDoubleExtra("lat", 0);
-                    myLon = data.getDoubleExtra("lon", 0);
-                    positionTextView.setText(title);
-
-                }
-                break;
-        }
-        super.onActivityResult(requestCode,resultCode,data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

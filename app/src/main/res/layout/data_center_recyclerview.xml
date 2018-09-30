@@ -56,15 +56,19 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:layout_weight="0.83"
+                        android:paddingRight="5dp"
+                        android:layout_weight="0.8"
                         android:text="서울시 노원구" />
-                    <TextView
+                    <youthshelter.youth.co.kr.components.FontFitTextView
                         android:id="@+id/shelter_distance_TextView"
                         android:visibility="invisible"
                         android:layout_width="0dp"
+                        android:maxLines="1"
+                        android:textColor="#8D8D8D"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:layout_weight="0.17"
+                        android:layout_weight="0.2"
+                        android:textSize="9sp"
                         android:text="10KM"/>
                 </LinearLayout>
 

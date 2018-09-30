@@ -158,7 +158,7 @@ public class SetMapActivity extends AppCompatActivity {
 
                     Intent intent = new Intent();
                     ArrayList<Address> titles = geocodeUtil.getAddressListUsingGeolocation(new GeocodeUtil.GeoLocation(latitude,longitude));
-                    if(titles.size() == 0) {
+                    if(titles.size() != 0) {
                         intent.putExtra("title", titles.get(0).getThoroughfare().toString());
                         intent.putExtra("lat", latitude);
                         intent.putExtra("lon", longitude);

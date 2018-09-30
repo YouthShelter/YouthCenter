@@ -67,6 +67,8 @@ public class YouthCenter implements Serializable {
 
     @Exclude
     private double distance;
+    @Exclude
+    private boolean isCalcDistance = false;
 }
 
 

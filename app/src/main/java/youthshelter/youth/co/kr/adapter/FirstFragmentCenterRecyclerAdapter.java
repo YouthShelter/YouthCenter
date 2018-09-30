@@ -134,25 +134,13 @@ public class FirstFragmentCenterRecyclerAdapter extends RecyclerView.Adapter<Fir
         else{
             holder.shelter_playTime_TextView.setText(center.getWeekday());
         }
-
+        if(center.isCalcDistance()) {
+            holder.shelter_distance_TextView.setText(Double.toString(center.getDistance()) + "km");
+            holder.shelter_distance_TextView.setVisibility(View.VISIBLE);
+        }
         holder.shelter_like_TextView.setText(Integer.toString(center.getLike()));
         GlideApp.with(context).load(storage.getReference().child("center").child(center.getImage()+"/0."+center.getFormat())).centerCrop().placeholder(R.drawable.noimage).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.shelter_image_ImageView);
 
-
-
-        /*holder.textView.setText(arrayList.get(position));
-        if(arrayList.get(position).equals(MainActivity.drawerMneu[0])){//내정보
-            holder.imageView.setImageResource(R.drawable.main_drawer_info);
-        }
-        else if(arrayList.get(position).equals(MainActivity.drawerMneu[1])){//공지사항
-            holder.imageView.setImageResource(R.drawable.main_drawer_notice);
-        }
-        else if(arrayList.get(position).equals(MainActivity.drawerMneu[2])){//시장IN정보
-            holder.imageView.setImageResource(R.drawable.main_drawer_sijang);
-        }
-        else if(arrayList.get(position).equals(MainActivity.drawerMneu[3])){//로그아웃
-            holder.imageView.setImageResource(R.drawable.main_drawer_exit);
-        }*/
     }
 
     @Override

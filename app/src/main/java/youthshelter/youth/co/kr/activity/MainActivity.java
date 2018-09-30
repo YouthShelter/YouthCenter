@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
@@ -18,10 +19,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
+import youthshelter.youth.co.kr.GlideApp;
 import youthshelter.youth.co.kr.adapter.ViewPagerAdapter;
 import youthshelter.youth.co.kr.R;
 import youthshelter.youth.co.kr.components.CustomViewPager;
@@ -34,47 +39,37 @@ public class MainActivity extends AppCompatActivity {
 
     private MessageHandler messageHandler;
     //private ActionBar
-    private TextView positionTextView;
-    private String title;
-    private double myLat = 0;
-    private double myLon = 0;
 
-    private final int SET_MAP = 0;
+
 
     ArrayList<YouthCenter> youthCenters;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         checkLocationPermission(this, MainActivity.this);
-        youthCenters = ( ArrayList<YouthCenter>)getIntent().getSerializableExtra("centers");
-        Log.i("tttttt",youthCenters.size()+"");
+        youthCenters = (ArrayList<YouthCenter>) getIntent().getSerializableExtra("centers");
+        Log.i("tttttt", youthCenters.size() + "");
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.action_bar_main);
         View view = getSupportActionBar().getCustomView();
 
-        positionTextView = (TextView)view.findViewById(R.id.position);
-
-        positionTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SetMapActivity.class);
-                startActivityForResult(intent, SET_MAP);
-                overridePendingTransition(0, 0);
-            }
-        });
-
         messageHandler = new MessageHandler();
         viewPager = (CustomViewPager) findViewById(R.id.main_viewPager);
-        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this, messageHandler,youthCenters);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), this, messageHandler, youthCenters);
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setSwipeEnabled(false);
 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.main_tabLayout);
         tabLayout.setupWithViewPager(viewPager);
+        //GlideApp.with(this).load(R.drawable.shelter_tab).centerCrop().placeholder(R.drawable.noimage).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.shelter_image_ImageView);
+        //GlideApp.with(this).load(R.drawable.culture_tab).centerCrop().placeholder(R.drawable.noimage).thumbnail(0.5f).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.shelter_image_ImageView);
+        tabLayout.getTabAt(0).setCustomView(R.layout.tab_button_layout);
+        tabLayout.getTabAt(1).setCustomView(R.layout.tab_button_layout2);
 
     }
 
@@ -117,19 +112,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult (int requestCode, int resultCode, Intent data){
-        switch(requestCode){
-            case SET_MAP:
-                if (resultCode== RESULT_OK){
-                    title = data.getStringExtra("title");
-                    myLat = data.getDoubleExtra("lat", 0);
-                    myLon = data.getDoubleExtra("lon", 0);
-                    positionTextView.setText(title);
-
-                }
-                break;
-        }
-        super.onActivityResult(requestCode,resultCode,data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

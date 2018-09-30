@@ -46,6 +46,7 @@ public class DetailActivity extends AppCompatActivity {
     private LinearLayout shelter_tel_detail_LinearLayout;
     private LinearLayout shelter_website_detail_LinearLayout;
     private LinearLayout culture_like_detail_LinearLayout;
+    private LinearLayout shelter_map_detail_LinearLayout;
 
     private Button shelter_map_detail_Button;
 
@@ -88,8 +89,8 @@ public class DetailActivity extends AppCompatActivity {
         shelter_website_detail_LinearLayout = (LinearLayout) findViewById(R.id.shelter_website_detail_LinearLayout);
         culture_like_detail_LinearLayout = (LinearLayout) findViewById(R.id.culture_like_detail_LinearLayout);
 
-        Button shelter_map_detail_Button = (Button) findViewById(R.id.shelter_map_detail_Button);
-        shelter_map_detail_Button.setOnClickListener(new View.OnClickListener() {
+        shelter_map_detail_LinearLayout = (LinearLayout) findViewById(R.id.shelter_map_detail_LinearLayout);
+        shelter_map_detail_LinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW,

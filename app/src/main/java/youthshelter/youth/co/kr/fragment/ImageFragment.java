@@ -37,7 +37,7 @@ public class ImageFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         imageURL = getArguments().getString("imageURL");
         Log.i("tttttt",imageURL);
-        GlideApp.with(this).load(storage.getReference().child("center").child(imageURL)).placeholder(R.drawable.no_image2).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.1f).into(imageView);
+        GlideApp.with(this).load(storage.getReference().child("center").child(imageURL)).placeholder(R.drawable.noimage).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.1f).into(imageView);
 
         //imageView.setImageResource(imageURL);
 

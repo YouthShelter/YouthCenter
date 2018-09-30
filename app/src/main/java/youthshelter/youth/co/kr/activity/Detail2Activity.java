@@ -95,7 +95,7 @@ public class Detail2Activity extends AppCompatActivity {
         });
 
         //Glide.with(this).load(cultureData.getImageName().toLowerCase()).thumbnail(0.1f).into(culture_detail_imageview);
-        GlideApp.with(this).load(cultureData.getImageName().toLowerCase()).placeholder(R.drawable.no_image2).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.2f).into(photoView);
+        GlideApp.with(this).load(cultureData.getImageName().toLowerCase()).placeholder(R.drawable.noimage).diskCacheStrategy(DiskCacheStrategy.ALL).thumbnail(0.2f).into(photoView);
 
 
     }
